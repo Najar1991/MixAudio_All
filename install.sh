@@ -1,5 +1,5 @@
-#!/bin/bash
-##Command=wget https://github.com/Najar1991/MixAudio_All/raw/refs/heads/main/install.sh -O - | /bin/sh
+#!/bin/sh
+##Command=wget https://github.com/Najar1991/MixAudio_All/raw/refs/heads/main/install.sh -O - | sh
 ##################################
 
 version="1.2"
@@ -13,7 +13,7 @@ echo ""
 echo "MixAudio Installer v$version"
 echo "============================"
 
-if [ "$EUID" -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
     echo "Error: Please run as root!"
     exit 1
 fi
@@ -28,7 +28,7 @@ if ! command -v python3 >/dev/null 2>&1; then
 fi
 
 PY_FULL=$(python3 -c "import sys; print(sys.version.split()[0])")
-PY_MAJOR_MINOR=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')")
+PY_MAJOR_MINOR=$(python3 -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))")
 
 if [ "$PY_MAJOR_MINOR" != "3.13" ]; then
     echo ""
@@ -87,17 +87,17 @@ cd "$tmp_dir" || exit 1
 if echo "$ARCH" | grep -qi "mips"; then
     echo "Detected architecture: MIPS"
     IPK_FILE="MixAudio_mipsel.ipk"
-    wget --no-check-certificate -q --show-progress "$ipkurl_mips" -O "$IPK_FILE"
+    wget --no-check-certificate -q "$ipkurl_mips" -O "$IPK_FILE"
 
 elif echo "$ARCH" | grep -qi "aarch64"; then
     echo "Detected architecture: aarch64"
     IPK_FILE="MixAudio_aarch64.ipk"
-    wget --no-check-certificate -q --show-progress "$ipkurl_aarch" -O "$IPK_FILE"
+    wget --no-check-certificate -q "$ipkurl_aarch" -O "$IPK_FILE"
 
 elif echo "$ARCH" | grep -qiE "armv7l|armv8|arm"; then
     echo "Detected architecture: ARM"
     IPK_FILE="MixAudio_arm.ipk"
-    wget --no-check-certificate -q --show-progress "$ipkurl_arm" -O "$IPK_FILE"
+    wget --no-check-certificate -q "$ipkurl_arm" -O "$IPK_FILE"
 
 else
     echo "Unsupported architecture: $ARCH"
@@ -117,7 +117,7 @@ INSTALL_STATUS=$?
 
 rm -rf "$tmp_dir"
 
-if [ $INSTALL_STATUS -eq 0 ]; then
+if [ "$INSTALL_STATUS" -eq 0 ]; then
     echo ""
     echo "=============================="
     echo "MixAudio v$version installed successfully!"
