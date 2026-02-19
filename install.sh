@@ -1,9 +1,9 @@
 #!/bin/bash
-##Command=wget https://github.com/Najar1991/MixAudio_ARM/raw/refs/heads/main/install.sh -O - | /bin/sh
+##Command=wget https://github.com/Najar1991/MixAudio_All/raw/refs/heads/main/install.sh -O - | /bin/sh
 ##################################
 
 version="1.2"
-base_url="https://github.com/Najar1991/MixAudio_ARM/raw/refs/heads/main"
+base_url="https://github.com/Najar1991/MixAudio_All/raw/refs/heads/main"
 
 ipkurl_arm="$base_url/MixAudio_arm.ipk"
 ipkurl_mips="$base_url/MixAudio_mipsel.ipk"
