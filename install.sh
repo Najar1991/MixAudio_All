@@ -21,7 +21,7 @@ fi
 if ! command -v python3 >/dev/null 2>&1; then
     echo ""
     echo "Error: Python3 is not installed!"
-    echo "This plugin requires Python 3.13.x"
+    echo "This plugin requires Python 3.13.x or 3.14.x"
     echo "Please upgrade your image and try again."
     echo ""
     exit 1
@@ -30,11 +30,11 @@ fi
 PY_FULL=$(python3 -c "import sys; print(sys.version.split()[0])")
 PY_MAJOR_MINOR=$(python3 -c "import sys; print(str(sys.version_info.major) + '.' + str(sys.version_info.minor))")
 
-if [ "$PY_MAJOR_MINOR" != "3.13" ]; then
+if [ "$PY_MAJOR_MINOR" != "3.13" ] && [ "$PY_MAJOR_MINOR" != "3.14" ]; then
     echo ""
     echo "Error: Unsupported Python version: $PY_FULL"
-    echo "This plugin requires Python 3.13.x ONLY"
-    echo "The plugin uses compiled .so files for Python 3.13"
+    echo "This plugin requires Python 3.13.x or 3.14.x ONLY"
+    echo "The plugin uses compiled .so files for Python 3.13/3.14"
     echo "Please upgrade your Enigma2 image and try again."
     echo ""
     exit 1
