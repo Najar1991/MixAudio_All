@@ -1,7 +1,7 @@
 #!/bin/sh
 
 ##################################
-version="1.3"
+version="1.4"
 base_url="https://github.com/Najar1991/MixAudio_All/raw/refs/heads/main"
 
 ipkurl_arm_py313="$base_url/MixAudio_arm_py313.ipk"
